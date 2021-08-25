@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8E0BB160-F829-49D0-9B68-B6F6C545AC8C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>MaterialDesignApp</RootNamespace>
+    <AssemblyName>MaterialDesignApp</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.2.7.1979, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.2.7\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=3.2.0.1979, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.3.2.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="AdminWindow.xaml.cs">
+      <DependentUpon>AdminWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Character.cs" />
+    <Compile Include="DataExchanger.cs" />
+    <Compile Include="Gamemanager.cs" />
+    <Compile Include="IManagementWindow.cs" />
+    <Compile Include="InventoryItem.cs" />
+    <Compile Include="MessageDialog.xaml.cs">
+      <DependentUpon>MessageDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OutlinedTextBlock.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="ReportTables\HighestLevelsRow.cs" />
+    <Compile Include="ReportTables\MostActivePlayersRow.cs" />
+    <Compile Include="ReportTables\MostExpensiveInventoriesRow.cs" />
+    <Compile Include="ReportTables\RichestPlayersRow.cs" />
+    <Compile Include="ReportTables\TopRatingRow.cs" />
+    <Compile Include="ViewModels\AccountViewModel.cs" />
+    <Compile Include="ViewModels\DownloadViewModel.cs" />
+    <Compile Include="ViewModels\GameViewModel.cs" />
+    <Compile Include="ViewModels\MyCharactersViewModel.cs" />
+    <Compile Include="ViewModels\NewsViewModel.cs" />
+    <Compile Include="ViewModels\PlayersViewModel.cs" />
+    <Compile Include="ViewModels\ReportsViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\ShopViewModel.cs" />
+    <Compile Include="Views\AccountView.xaml.cs">
+      <DependentUpon>AccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DownloadView.xaml.cs">
+      <DependentUpon>DownloadView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GameView.xaml.cs">
+      <DependentUpon>GameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserWindow.xaml.cs">
+      <DependentUpon>UserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SolidColorBrushComparer.cs" />
+    <Compile Include="Views\MyCharactersView.xaml.cs">
+      <DependentUpon>MyCharactersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewsView.xaml.cs">
+      <DependentUpon>NewsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayersView.xaml.cs">
+      <DependentUpon>PlayersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportsView.xaml.cs">
+      <DependentUpon>ReportsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShopView.xaml.cs">
+      <DependentUpon>ShopView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="AdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MessageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DownloadView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StartWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helper.cs" />
+    <Compile Include="StartWindow.xaml.cs">
+      <DependentUpon>StartWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Views\MyCharactersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlayersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShopView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Resource Include="Montserrat\Montserrat-Black.ttf" />
+    <Resource Include="Montserrat\Montserrat-BlackItalic.ttf" />
+    <Resource Include="Montserrat\Montserrat-Bold.ttf" />
+    <Resource Include="Montserrat\Montserrat-BoldItalic.ttf" />
+    <Resource Include="Montserrat\Montserrat-ExtraBold.ttf" />
+    <Resource Include="Montserrat\Montserrat-ExtraBoldItalic.ttf" />
+    <Resource Include="Montserrat\Montserrat-ExtraLight.ttf" />
+    <Resource Include="Montserrat\Montserrat-ExtraLightItalic.ttf" />
+    <Resource Include="Montserrat\Montserrat-Italic.ttf" />
+    <Resource Include="Montserrat\Montserrat-Light.ttf" />
+    <Resource Include="Montserrat\Montserrat-LightItalic.ttf" />
+    <Resource Include="Montserrat\Montserrat-Medium.ttf" />
+    <Resource Include="Montserrat\Montserrat-MediumItalic.ttf" />
+    <Resource Include="Montserrat\Montserrat-Regular.ttf" />
+    <Resource Include="Montserrat\Montserrat-SemiBold.ttf" />
+    <Resource Include="Montserrat\Montserrat-SemiBoldItalic.ttf" />
+    <Resource Include="Montserrat\Montserrat-Thin.ttf" />
+    <Resource Include="Montserrat\Montserrat-ThinItalic.ttf" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\FirewatchBG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\closeIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\account.png" />
+    <Resource Include="Images\close_white.png" />
+    <Resource Include="Images\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\account_yellow.png" />
+    <Resource Include="Images\close_red.png" />
+    <Resource Include="Images\settings_yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\HeroIcons\pudge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\HeroIcons\lina.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\coins.png" />
+    <Resource Include="Images\rating.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\minimize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\minimize_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\joystick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\HeroIcons\antimage.png" />
+    <Resource Include="Images\HeroIcons\arcwarden.png" />
+    <Resource Include="Images\HeroIcons\dazzle.png" />
+    <Resource Include="Images\HeroIcons\kunkka.png" />
+    <Resource Include="Images\HeroIcons\mortra.png" />
+    <Resource Include="Images\HeroIcons\od.png" />
+    <Resource Include="Images\HeroIcons\tidehunter.png" />
+    <Resource Include="Images\HeroIcons\venge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\HeroAvatars\antimage.jpg" />
+    <Resource Include="Images\HeroAvatars\arcwarden.jpg" />
+    <Resource Include="Images\HeroAvatars\dazzle.jpg" />
+    <Resource Include="Images\HeroAvatars\kunkka.jpg" />
+    <Resource Include="Images\HeroAvatars\lina.jpg" />
+    <Resource Include="Images\HeroAvatars\mortra.jpg" />
+    <Resource Include="Images\HeroAvatars\od.jpg" />
+    <Resource Include="Images\HeroAvatars\pudge.jpg" />
+    <Resource Include="Images\HeroAvatars\tidehunter.jpg" />
+    <Resource Include="Images\HeroAvatars\venge.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\left_arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\money.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ItemCategories\armor.png" />
+    <Resource Include="Images\ItemCategories\artefacts.png" />
+    <Resource Include="Images\ItemCategories\magic.png" />
+    <Resource Include="Images\ItemCategories\weapon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Items\aghanim.png" />
+    <Resource Include="Images\Items\boots_of_travel.png" />
+    <Resource Include="Images\Items\deadalus.png" />
+    <Resource Include="Images\Items\demon_edge.png" />
+    <Resource Include="Images\Items\hex.png" />
+    <Resource Include="Images\Items\linken_sphere.png" />
+    <Resource Include="Images\Items\radiance.png" />
+    <Resource Include="Images\Items\shivas_guard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ItemCategories\consumable.png" />
+    <Resource Include="Images\ItemCategories\support.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Items\clarity.png" />
+    <Resource Include="Images\Items\dust.png" />
+    <Resource Include="Images\Items\enchanted_mango.png" />
+    <Resource Include="Images\Items\faerie_fire.png" />
+    <Resource Include="Images\Items\flask.png" />
+    <Resource Include="Images\Items\infused_raindrop.png" />
+    <Resource Include="Images\Items\iron_branch.png" />
+    <Resource Include="Images\Items\observer_ward.png" />
+    <Resource Include="Images\Items\sentry_ward.png" />
+    <Resource Include="Images\Items\smoke_of_deceit.png" />
+    <Resource Include="Images\Items\tango.png" />
+    <Resource Include="Images\Items\tome_of_knowledge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Items\tp_scroll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Items\abyssal_blade.png" />
+    <Resource Include="Images\Items\armlet.png" />
+    <Resource Include="Images\Items\assault_cuirass.png" />
+    <Resource Include="Images\Items\black_king_bar.png" />
+    <Resource Include="Images\Items\blade_mail.png" />
+    <Resource Include="Images\Items\blink.png" />
+    <Resource Include="Images\Items\bloodstone.png" />
+    <Resource Include="Images\Items\bloodthorn.png" />
+    <Resource Include="Images\Items\boots.png" />
+    <Resource Include="Images\Items\bracer.png" />
+    <Resource Include="Images\Items\buckler.png" />
+    <Resource Include="Images\Items\butterfly.png" />
+    <Resource Include="Images\Items\cloak.png" />
+    <Resource Include="Images\Items\cyclone.png" />
+    <Resource Include="Images\Items\ethereal_blade.png" />
+    <Resource Include="Images\Items\gem.png" />
+    <Resource Include="Images\Items\ghost.png" />
+    <Resource Include="Images\Items\guardian_greaves.png" />
+    <Resource Include="Images\Items\hand_of_midas.png" />
+    <Resource Include="Images\Items\headdress.png" />
+    <Resource Include="Images\Items\hood_of_defiance.png" />
+    <Resource Include="Images\Items\lifesteal.png" />
+    <Resource Include="Images\Items\magic_wand.png" />
+    <Resource Include="Images\Items\manta.png" />
+    <Resource Include="Images\Items\mekansm.png" />
+    <Resource Include="Images\Items\meteor_hammer.png" />
+    <Resource Include="Images\Items\moon_shard.png" />
+    <Resource Include="Images\Items\null_talisman.png" />
+    <Resource Include="Images\Items\octarine_core.png" />
+    <Resource Include="Images\Items\phase_boots.png" />
+    <Resource Include="Images\Items\pipe.png" />
+    <Resource Include="Images\Items\power_treads.png" />
+    <Resource Include="Images\Items\shadow_amulet.png" />
+    <Resource Include="Images\Items\shadow_blade.png" />
+    <Resource Include="Images\Items\silver_edge.png" />
+    <Resource Include="Images\Items\tarrasque.png" />
+    <Resource Include="Images\Items\urn_of_shadows.png" />
+    <Resource Include="Images\Items\vanguard.png" />
+    <Resource Include="Images\Items\wind_lace.png" />
+    <Resource Include="Images\Items\wraith_band.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\inventory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\anxiety.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\anxiety_blackwhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cloud.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\exclamation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\password.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets'))" />
+  </Target>
+</Project>

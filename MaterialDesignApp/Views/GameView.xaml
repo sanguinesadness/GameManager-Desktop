@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="MaterialDesignApp.Views.GameView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaterialDesignApp.Views"
+             TextOptions.TextRenderingMode="Aliased" FontSize="18"
+             FontFamily="/MaterialDesignApp;component/Montserrat/#Montserrat"
+             mc:Ignorable="d" 
+             d:DesignHeight="815" d:DesignWidth="1440"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Loaded="UserControl_Loaded">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*"/>
+            <ColumnDefinition Width="0.6*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="Sections" Grid.Column="0" Background="#F0ECF8" Height="815">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="85"/>
+                <RowDefinition Height="730"/>
+            </Grid.RowDefinitions>
+            <Border Height="85" Grid.Row="0">
+                <TextBlock Text="Доступные разделы" FontSize="22" 
+                                   VerticalAlignment="Center" TextAlignment="Center" 
+                                   FontFamily="/MaterialDesignApp;component/Montserrat/#Montserrat SemiBold"/>
+            </Border>
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" Margin="0 0 0 40">
+                <TreeView x:Name="SectionsTree" FontSize="22" PreviewMouseWheel="SectionsTree_PreviewMouseWheel">
+                    <TreeViewItem x:Name="LocationsSection" Header="Локации" Margin="0 0 0 20"/>
+                    <TreeViewItem x:Name="CharactersSection" Header="Персонажи" Margin="0 0 0 20"/>
+                    <TreeViewItem x:Name="ItemsSection" Header="Предметы" Margin="0 0 0 20"/>
+                    <TreeViewItem x:Name="MobsSection" Header="Существа" Margin="0 0 0 20"/>
+                </TreeView>
+            </ScrollViewer>
+        </Grid>
+        <Grid x:Name="Content" Grid.Column="1" Height="815">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="85"/>
+                <RowDefinition Height="730"/>
+            </Grid.RowDefinitions>
+            <Border Height="85" Grid.Row="0">
+                <TextBlock Text="Информация о выбранном элементе" FontSize="22" 
+                           VerticalAlignment="Center" TextAlignment="Center" 
+                           FontFamily="/MaterialDesignApp;component/Montserrat/#Montserrat SemiBold"/>
+            </Border>
+            <ScrollViewer Grid.Row="1" Padding="70 40">
+                <StackPanel>
+                    <TextBlock x:Name="TitleTextBox" TextAlignment="Center" FontSize="24"
+                               FontWeight="SemiBold" Margin="0 0 0 30" Visibility="Hidden">
+                            <Run x:Name="SectionTitleRun" Text="Существа"/>
+                            <Run Text="➞"/>
+                            <Run x:Name="ItemTitleRun" Text="Вампир" Foreground="#FFDCC800"/>
+                    </TextBlock>
+                    <TextBox x:Name="ItemDescription" FontSize="22" TextWrapping="Wrap" TextAlignment="Justify"
+                                 IsReadOnly="True" Style="{StaticResource MaterialDesignComboBoxEditableTextBox}"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

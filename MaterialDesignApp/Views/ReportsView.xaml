@@ -1,0 +1,462 @@
+﻿<UserControl x:Class="MaterialDesignApp.Views.ReportsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaterialDesignApp.Views"
+             TextOptions.TextRenderingMode="Aliased" FontSize="18"
+             FontFamily="/MaterialDesignApp;component/Montserrat/#Montserrat"
+             mc:Ignorable="d" 
+             d:DesignHeight="815" d:DesignWidth="1440"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Loaded="UserControl_Loaded">
+    <materialDesign:DialogHost x:Name="DialogHost">
+        <materialDesign:DialogHost.DialogContent>
+            <Border Background="White" Padding="15">
+                <Grid>
+                    <StackPanel x:Name="SaveSuccessDialog" Visibility="Collapsed" Width="250">
+                        <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"
+                                   Margin="0 0 0 20" TextAlignment="Center" Foreground="#27ae60"
+                                   Text="Экспорт таблицы"/>
+                        <TextBlock HorizontalAlignment="Center" FontSize="16"
+                                   TextWrapping="Wrap" Margin="0 0 0 15"
+                                   LineHeight="25" TextAlignment="Center">
+                            <Run Text="Данные были"/>
+                            <Run Text="успешно" FontWeight="Bold"/>
+                            <Run Text="экспортированы."/>
+                        </TextBlock>
+                        <Button Content="Ок" FontSize="16" Height="50"
+                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                    </StackPanel>
+                    <StackPanel x:Name="SaveErrorDialog" Visibility="Collapsed" Width="250">
+                        <TextBlock HorizontalAlignment="Center" FontSize="18" FontWeight="Bold"
+                                   Margin="0 0 0 20" TextAlignment="Center" Foreground="#ED4C67"
+                                   Text="Экспорт таблицы"/>
+                        <TextBlock HorizontalAlignment="Center" FontSize="16"
+                                   TextWrapping="Wrap" Margin="0 0 0 15"
+                                   LineHeight="25" TextAlignment="Center">
+                            <Run Text="Ошибка доступа к файлу: возможно, он уже открыт."/>
+                            <Run Text="Закройте" FontWeight="Bold"/>
+                            <Run Text="и"/>
+                            <Run Text="повторите" FontWeight="Bold"/>
+                            <Run Text="попытку."/>
+                        </TextBlock>
+                        <Button Content="Ок" FontSize="16" Height="50"
+                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </materialDesign:DialogHost.DialogContent>
+
+        <Grid Background="White">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.372*"/>
+                <ColumnDefinition Width="0.641*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Background="#F0ECF8" Height="815">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="85"/>
+                    <RowDefinition Height="630"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <Border Height="85" Grid.Row="0">
+                    <TextBlock Text="Доступные запросы" FontSize="22" 
+                               VerticalAlignment="Center" TextAlignment="Center" 
+                               FontFamily="/MaterialDesignApp;component/Montserrat/#Montserrat SemiBold"/>
+                </Border>
+                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden"
+                              Grid.Row="1" Padding="0 50 0 0">
+                    <ListView x:Name="QueryList" FontSize="22">
+                        <ListViewItem x:Name="TopRatingItem" Height="70" MouseUp="TopRatingItem_MouseUp">
+                            <ListViewItem.Content>
+                                <StackPanel Orientation="Horizontal" Margin="80 0 0 0">
+                                    <materialDesign:PackIcon Kind="FormatListBulletedTriangle" Margin="0 0 20 0"
+                                                             Foreground="#961565">
+                                        <materialDesign:PackIcon.RenderTransform>
+                                            <ScaleTransform CenterX="0.5" CenterY="0.5"
+                                                            ScaleX="1.6" ScaleY="1.6"/>
+                                        </materialDesign:PackIcon.RenderTransform>
+                                    </materialDesign:PackIcon>
+                                    <TextBlock Text="Топ рейтинга"/>
+                                </StackPanel>
+                            </ListViewItem.Content>
+                        </ListViewItem>
+                        <ListViewItem x:Name="MostActivePlayersItem" Height="70" MouseUp="MostActivePlayersItem_MouseUp">
+                            <ListViewItem.Content>
+                                <StackPanel Orientation="Horizontal" Margin="80 0 0 0">
+                                    <materialDesign:PackIcon Kind="ClockOutline" Margin="0 0 20 0"
+                                                             Foreground="#821564">
+                                        <materialDesign:PackIcon.RenderTransform>
+                                            <ScaleTransform CenterX="0.5" CenterY="0.5"
+                                                            ScaleX="1.6" ScaleY="1.6"/>
+                                        </materialDesign:PackIcon.RenderTransform>
+                                    </materialDesign:PackIcon>
+                                    <TextBlock Text="Самые активные игроки"/>
+                                </StackPanel>
+                            </ListViewItem.Content>
+                        </ListViewItem>
+                        <ListViewItem x:Name="MostExpensiveInventoriesItem" Height="70" MouseUp="MostExpensiveInventoriesItem_MouseUp">
+                            <ListViewItem.Content>
+                                <StackPanel Orientation="Horizontal" Margin="80 0 0 0">
+                                    <materialDesign:PackIcon Kind="BagPersonalOutline" Margin="0 0 20 0"
+                                                             Foreground="#6e1564">
+                                        <materialDesign:PackIcon.RenderTransform>
+                                            <ScaleTransform CenterX="0.5" CenterY="0.5"
+                                                            ScaleX="1.6" ScaleY="1.6"/>
+                                        </materialDesign:PackIcon.RenderTransform>
+                                    </materialDesign:PackIcon>
+                                    <TextBlock Text="Самые дорогие инвентари"/>
+                                </StackPanel>
+                            </ListViewItem.Content>
+                        </ListViewItem>
+                        <ListViewItem x:Name="RichestPlayersItem" Height="70" MouseUp="RichestPlayersItem_MouseUp">
+                            <ListViewItem.Content>
+                                <StackPanel Orientation="Horizontal" Margin="80 0 0 0">
+                                    <materialDesign:PackIcon Kind="CoinOutline" Margin="0 0 20 0"
+                                                             Foreground="#591564">
+                                        <materialDesign:PackIcon.RenderTransform>
+                                            <ScaleTransform CenterX="0.5" CenterY="0.5"
+                                                            ScaleX="1.6" ScaleY="1.6"/>
+                                        </materialDesign:PackIcon.RenderTransform>
+                                    </materialDesign:PackIcon>
+                                    <TextBlock Text="Самые богатые игроки"/>
+                                </StackPanel>
+                            </ListViewItem.Content>
+                        </ListViewItem>
+                        <ListViewItem x:Name="HighestLevelsItem" Height="70" MouseUp="HighestLevelsItem_MouseUp">
+                            <ListViewItem.Content>
+                                <StackPanel Orientation="Horizontal" Margin="80 0 0 0">
+                                    <materialDesign:PackIcon Kind="ArrowUpBoldCircleOutline" Margin="0 0 20 0"
+                                                             Foreground="#461564">
+                                        <materialDesign:PackIcon.RenderTransform>
+                                            <ScaleTransform CenterX="0.5" CenterY="0.5"
+                                                            ScaleX="1.6" ScaleY="1.6"/>
+                                        </materialDesign:PackIcon.RenderTransform>
+                                    </materialDesign:PackIcon>
+                                    <TextBlock Text="Самые высокие уровни"/>
+                                </StackPanel>
+                            </ListViewItem.Content>
+                        </ListViewItem>
+                    </ListView>
+                </ScrollViewer>
+            </Grid>
+
+            <Grid x:Name="ContentGrid" Grid.Column="1" Background="White" Height="815">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="85"/>
+                    <RowDefinition Height="630"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <Border Height="85" Grid.Row="0" Visibility="Hidden">
+                    <TextBlock FontSize="22" Text="Самые активные игроки" x:Name="ContentTitle"
+                               VerticalAlignment="Center" TextAlignment="Center" 
+                               FontFamily="/MaterialDesignApp;component/Montserrat/#Montserrat SemiBold"/>
+                </Border>
+                <Border Grid.Row="1" Padding="50">
+                    <Grid x:Name="DataGrids">
+                        <Grid x:Name="StartInfoContent" Margin="0 15 0 0">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Image Source="/Images/info.png" Height="50" RenderOptions.BitmapScalingMode="Fant" Margin="0 0 20 0"/>
+                                <TextBlock Text="Выберите запрос в списке слева, чтобы осуществить выборку данных из базы." 
+                               FontSize="24" TextWrapping="Wrap" Width="700" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Grid>
+                        <DataGrid x:Name="TopRatingDataGrid" RowHeight="50" Visibility="Hidden"
+                              IsReadOnly="True" CanUserSortColumns="True" FontSize="18" Background="White" 
+                              CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Path=Number}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="#" TextAlignment="Center"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=CharacterName}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Персонаж" TextAlignment="Center" MinWidth="220"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=Rating}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Рейтинг" TextAlignment="Center" MinWidth="220"
+                                                   FontWeight="Bold"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=PlayerName}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Игрок" TextAlignment="Center" MinWidth="220"
+                                                   ToolTip="Логин игрока, которому принадлежит персонаж"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <DataGrid x:Name="MostActivePlayersDataGrid" RowHeight="50" Visibility="Hidden"
+                              IsReadOnly="True" CanUserSortColumns="True" FontSize="18" Background="White" 
+                              CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Path=Number}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="#" TextAlignment="Center"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=PlayerName}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Имя" TextAlignment="Center" MinWidth="150"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=NumberOfCharacters}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Персонажей" TextAlignment="Center" MinWidth="150"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=TotalHours}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Всего часов" TextAlignment="Center" MinWidth="150"
+                                                   ToolTip="Суммарное количество времени, потраченное в игре"
+                                                   FontWeight="Bold"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=AverageHours}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Часов в среднем" TextAlignment="Center" MinWidth="150"
+                                                   ToolTip="Среднее потраченное время на одного персонажа"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <DataGrid x:Name="MostExpensiveInventoriesDataGrid" RowHeight="50" Visibility="Hidden"
+                              IsReadOnly="True" CanUserSortColumns="True" FontSize="18" Background="White" 
+                              CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Path=Number}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="#" TextAlignment="Center"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=CharacterName}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Персонаж" TextAlignment="Center" MinWidth="150"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=NumberOfItems}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Предметов" TextAlignment="Center" MinWidth="150"
+                                                   ToolTip="Количество различных предметов в инвентаре"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=TotalValue}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Стоимость" TextAlignment="Center" MinWidth="150"
+                                                   ToolTip="Суммарная стоимость всех предметов"
+                                                   FontWeight="Bold"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=PlayerName}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Игрок" TextAlignment="Center" MinWidth="150"
+                                                   ToolTip="Логин игрока, которому принадлежит персонаж"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <DataGrid x:Name="RichestPlayersDataGrid" RowHeight="50" Visibility="Hidden"
+                              IsReadOnly="True" CanUserSortColumns="True" FontSize="18" Background="White" 
+                              CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Path=Number}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="#" TextAlignment="Center"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=PlayerName}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Игрок" TextAlignment="Center" MinWidth="220"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=NumberOfCharacters}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Персонажей" TextAlignment="Center" MinWidth="220"
+                                                   ToolTip="Количество персонажей игрока"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=TotalGold}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Золото" TextAlignment="Center" MinWidth="220"
+                                                   ToolTip="Суммарное количество золота у всех персонажей игрока на данный момент"
+                                                   FontWeight="Bold"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <DataGrid x:Name="HighestLevelsDataGrid" RowHeight="50" Visibility="Hidden"
+                              IsReadOnly="True" CanUserSortColumns="True" FontSize="18" Background="White" 
+                              CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Path=Number}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="#" TextAlignment="Center"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=CharacterName}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Персонаж" TextAlignment="Center" MinWidth="220"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=Level}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Уровень" TextAlignment="Center" MinWidth="220"
+                                                   FontWeight="Bold"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Binding="{Binding Path=PlayerName}">
+                                    <DataGridTextColumn.Header>
+                                        <TextBlock Text="Игрок" TextAlignment="Center" MinWidth="220"
+                                                   ToolTip="Логин игрока, которому принадлежит персонаж"/>
+                                    </DataGridTextColumn.Header>
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </Border>
+                <Border Grid.Row="2" Height="100" Visibility="Hidden">
+                    <Button x:Name="ExportToExcelButton"
+                            Content="Экспортировать в Excel..." Height="100" FontSize="22"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Click="ExportToExcelButton_Click"/>
+                </Border>
+            </Grid>
+        </Grid>
+    </materialDesign:DialogHost>
+</UserControl>

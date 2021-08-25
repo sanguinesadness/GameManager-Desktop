@@ -1,0 +1,289 @@
+﻿<Window 
+        x:Class="MaterialDesignApp.StartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MaterialDesignApp"
+        mc:Ignorable="d"
+        Title="Login" Height="650" Width="1050"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        FontSize="18"
+        TextOptions.TextRenderingMode="Aliased" 
+        FontFamily="/MaterialDesignApp;component/Montserrat/#Montserrat"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown"
+        Icon="/Images/password.png">
+
+    <Border Background="Transparent" Padding="25">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="30" Direction="0" ShadowDepth="1" Opacity="0.2"/>
+        </Border.Effect>
+        <Border x:Name="Wrapper" Background="#FFF" CornerRadius="0" ClipToBounds="True">
+            <Grid>
+                <Image x:Name="CloseButton"
+                   Source="/Images/closeIcon.png" 
+                   Stretch="Fill" Height="40" Width="40" 
+                   RenderOptions.BitmapScalingMode="HighQuality" 
+                   VerticalAlignment="Top" HorizontalAlignment="Right" 
+                   Margin="15" Cursor="Hand" 
+                   MouseUp="CloseButton_MouseUp" MouseEnter="CloseButton_MouseEnter" MouseLeave="CloseButton_MouseLeave">
+                </Image>
+                <Grid x:Name="LoginPage" Visibility="Visible">
+                    <materialDesign:DialogHost x:Name="LoginDialogHost" CloseOnClickAway="True">
+                        <materialDesign:DialogHost.DialogContent>
+                            <Border Margin="20" Width="250">
+                                <StackPanel x:Name="LoginDialogError">
+                                    <TextBlock HorizontalAlignment="center" FontSize="18" FontWeight="Bold"
+                                               Margin="0 0 0 7" TextAlignment="Center" Foreground="#ED4C67"
+                                               Text="Не удаётся войти."/>
+                                    <TextBlock HorizontalAlignment="Center" FontSize="16" 
+                                               TextWrapping="Wrap" Margin="0 0 0 10" 
+                                               LineHeight="25" TextAlignment="Center">
+                                        <Run>Проверьте правильность написания</Run>
+                                        <Run FontWeight="Bold">логина</Run>
+                                        <Run>и</Run>
+                                        <Run FontWeight="Bold">пароля</Run><Run Text="."/>
+                                    </TextBlock>
+                                    <Button Content="Повторить еще раз" FontSize="16" Height="50" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                                </StackPanel>
+                            </Border>
+                        </materialDesign:DialogHost.DialogContent>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="400"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Images/FirewatchBG.png" Stretch="Fill" Width="400" Height="600" Grid.Column="0" RenderOptions.BitmapScalingMode="HighQuality"/>
+                            <Border x:Name="LoginContent" Padding="45 65" Grid.Column="1">
+                                <StackPanel>
+                                    <TextBlock Text="Game manager" Margin="0 0 0 45" HorizontalAlignment="Left" FontSize="36" FontFamily="/MaterialDesignApp;component/Montserrat/#Montserrat SemiBold">
+                                        <TextBlock.Foreground>
+                                            <LinearGradientBrush MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="1,0">
+                                                <GradientStop Color="#673AB7" Offset="0.1"/>
+                                                <GradientStop Color="#681565" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </TextBlock.Foreground>
+                                    </TextBlock>
+                                    <TextBlock Text="Введите данные для входа:" FontSize="20" Margin="0 0 0 40"/>
+                                    <Grid Height="50" Margin="0 10 0 25" GotFocus="TextGrid_GotFocus">
+                                        <TextBox x:Name="LoginTextBox1"
+                                         materialDesign:HintAssist.Hint="Логин"
+                                         materialDesign:TextFieldAssist.HasClearButton="True"                                 
+                                         VerticalAlignment="Top"
+                                         MouseEnter="TextField_MouseEnter"
+                                         MouseLeave="TextField_MouseLeave"
+                                         PreviewKeyDown="LoginTextBox1_PreviewKeyDown"
+                                         KeyUp="LoginKeyUp"/>
+                                        <TextBlock x:Name="LoginError1" 
+                                           FontSize="12" 
+                                           Foreground="#FFF44336" 
+                                           VerticalAlignment="Bottom"
+                                           Visibility="Hidden"
+                                           Text="Поле обязательно для заполнения."/>
+                                    </Grid>
+                                    <Grid Height="50" Margin="0 0 0 35" GotFocus="TextGrid_GotFocus">
+                                        <PasswordBox x:Name="PasswordBox1"
+                                             materialDesign:HintAssist.Hint="Пароль"
+                                             materialDesign:TextFieldAssist.HasClearButton="True"
+                                             VerticalAlignment="Top"                                         
+                                             MouseEnter="TextField_MouseEnter"
+                                             MouseLeave="TextField_MouseLeave"
+                                             PreviewKeyDown="PasswordBox1_PreviewKeyDown"
+                                             KeyUp="LoginKeyUp"/>
+                                        <TextBlock x:Name="PasswordError1" 
+                                   FontSize="12" 
+                                   Foreground="#FFF44336" 
+                                   VerticalAlignment="Bottom"
+                                   Visibility="Hidden"
+                                   Text="Поле обязательно для заполнения."/>
+
+                                    </Grid>
+                                    <CheckBox x:Name="RememberPasswordCheckBox"
+                                              IsChecked="False" materialDesign:CheckBoxAssist.CheckBoxSize="30"
+                                              Content="Запомнить пароль" Margin="0 0 0 50"/>
+                                    <Grid>
+                                        <Button x:Name="LoginButton1" HorizontalAlignment="Left" 
+                                        Width="200" Height="60" Content="Войти" 
+                                        Click="LoginButton1_Click" 
+                                        materialDesign:ButtonAssist.CornerRadius="5" FontSize="20"/>
+                                        <Button x:Name="RegButton1" HorizontalAlignment="Right" 
+                                        Width="200" Height="60" Content="Регистрация" 
+                                        Style="{StaticResource MaterialDesignFlatButton}" 
+                                        Click="RegButton1_Click" FontSize="20"/>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </materialDesign:DialogHost>
+                </Grid>
+                <Grid x:Name="RegPage" Visibility="Hidden">
+                    <materialDesign:DialogHost x:Name="RegDialogHost" CloseOnClickAway="True">
+                        <materialDesign:DialogHost.DialogContent>
+                            <Border Margin="20" Width="300">
+                                <Grid>
+                                    <StackPanel x:Name="RegDialogSuccess" Visibility="Visible">
+                                        <StackPanel>
+                                            <Grid Margin="0 0 0 5" HorizontalAlignment="Center">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition/>
+                                                    <ColumnDefinition Width="5"/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Text="Пользователь" FontSize="16" Grid.Column="0"/>
+                                                <TextBlock x:Name="DialogUserLogin" Text="user" FontSize="16" FontWeight="Bold" Foreground="#27ae60" Grid.Column="2"/>
+                                            </Grid>
+                                            <TextBlock Text="был успешно зарегистрирован" FontSize="16" HorizontalAlignment="Center" Margin="0 0 0 15"/>
+                                        </StackPanel>
+                                        <Button Content="Продолжить" FontSize="16" Height="50" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                                    </StackPanel>
+                                    <StackPanel x:Name="RegDialogError" Visibility="Hidden">
+                                        <TextBlock Text="При регистрации пользователя произошла неизвестная ошибка."
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="16" Foreground="#ED4C67" TextWrapping="Wrap" Margin="0 0 0 10" LineHeight="25" TextAlignment="Center"/>
+                                        <Button Content="Повторить позже" FontSize="16" Height="50" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </materialDesign:DialogHost.DialogContent>
+                        <Border Padding="60">
+                            <StackPanel>
+                                <TextBlock Text="Game Manager" Margin="0 0 0 45" HorizontalAlignment="Left" FontSize="36" FontFamily="/MaterialDesignApp;component/Montserrat/#Montserrat SemiBold">
+                                <TextBlock.Foreground>
+                                    <LinearGradientBrush MappingMode="RelativeToBoundingBox" StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#673AB7" Offset="0.1"/>
+                                        <GradientStop Color="#681565" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                            <TextBlock Text="Введите данные для регистрации нового пользователя:" FontSize="20" Margin="0 0 0 45"/>
+                            <Grid Margin="0 0 0 50">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="400"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="400"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <Grid Height="50" Margin="0 0 0 25">
+                                        <TextBox x:Name="LoginTextBox2" 
+                                                 Width="400"
+                                                 materialDesign:HintAssist.Hint="Логин"
+                                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                                 VerticalAlignment="Top" HorizontalAlignment="Right"
+                                                 GotFocus="LoginTextBox2_GotFocus"
+                                                 TextChanged="LoginTextBox2_TextChanged"
+                                                 MouseEnter="TextField_MouseEnter"
+                                                 MouseLeave="TextField_MouseLeave"
+                                                 PreviewKeyDown="LoginTextBox2_PreviewKeyDown"
+                                                 KeyUp="RegKeyUp"/>
+                                        <TextBlock x:Name="LoginError2" 
+                                                   FontSize="12" 
+                                                   Foreground="#FFF44336" 
+                                                   VerticalAlignment="Bottom"
+                                                   Visibility="Hidden"
+                                                   Text="Поле обязательно для заполнения."/>
+                                    </Grid>
+                                    <Grid Height="50" Margin="0 0 0 25">
+                                        <PasswordBox x:Name="RegPasswordBox1"
+                                                     materialDesign:HintAssist.Hint="Пароль"
+                                                     materialDesign:TextFieldAssist.HasClearButton="True"
+                                                     VerticalAlignment="Top"
+                                                     GotFocus="RegPasswordBox1_GotFocus"
+                                                     MouseEnter="TextField_MouseEnter"
+                                                     MouseLeave="TextField_MouseLeave"
+                                                     PreviewKeyDown="RegPasswordBox1_PreviewKeyDown"
+                                                     KeyUp="RegKeyUp"/>
+                                        <TextBlock x:Name="RegPasswordError1" 
+                                               FontSize="12" 
+                                               Foreground="#FFF44336" 
+                                               VerticalAlignment="Bottom"
+                                               Visibility="Hidden"
+                                               Text="Поле обязательно для заполнения."/>
+                                    </Grid>
+                                    <Grid Height="50">
+                                        <PasswordBox x:Name="RegPasswordBox2"
+                                                     materialDesign:HintAssist.Hint="Повторите пароль"
+                                                     materialDesign:TextFieldAssist.HasClearButton="True"
+                                                     VerticalAlignment="Top"
+                                                     GotFocus="RegPasswordBox2_GotFocus"
+                                                     MouseEnter="TextField_MouseEnter"
+                                                     MouseLeave="TextField_MouseLeave"
+                                                     PreviewKeyDown="RegPasswordBox2_PreviewKeyDown"
+                                                     KeyUp="RegKeyUp"/>
+                                        <TextBlock x:Name="RegPasswordError2" 
+                                               FontSize="12" 
+                                               Foreground="#FFF44336" 
+                                               VerticalAlignment="Bottom"
+                                               Visibility="Hidden"
+                                               Text="Поле обязательно для заполнения."/>
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2">
+                                    <Grid Height="50" Margin="0 0 0 25">
+                                        <TextBox x:Name="EmailTextBox" 
+                                                 materialDesign:HintAssist.Hint="Email"
+                                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                                 VerticalAlignment="Top"
+                                                 GotFocus="EmailTextBox_GotFocus" 
+                                                 TextChanged="EmailTextBox_TextChanged"
+                                                 MouseEnter="TextField_MouseEnter"
+                                                 MouseLeave="TextField_MouseLeave"
+                                                 PreviewKeyDown="EmailTextBox_PreviewKeyDown"
+                                                 KeyUp="RegKeyUp"/>
+                                        <TextBlock x:Name="EmailError" 
+                                                   FontSize="12" 
+                                                   Foreground="#FFF44336" 
+                                                   VerticalAlignment="Bottom"
+                                                   Visibility="Hidden"
+                                                   Text="Поле обязательно для заполнения."/>
+                                    </Grid>
+                                    <Grid Height="50" Margin="0 0 0 18">
+                                            <DatePicker x:Name="BirthPicker"
+                                                        materialDesign:HintAssist.Hint="Дата рождения"
+                                                        materialDesign:HintAssist.IsFloating="False"
+                                                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                                        VerticalAlignment="Top"
+                                                        SelectedDateChanged="BirthPicker_SelectedDateChanged"
+                                                        MouseEnter="TextField_MouseEnter"
+                                                        MouseLeave="TextField_MouseLeave"
+                                                        PreviewKeyDown="BirthPicker_PreviewKeyDown"
+                                                        KeyUp="RegKeyUp"/>
+                                        </Grid>
+                                    <Grid Height="50">
+                                        <TextBlock Text="Пол:" VerticalAlignment="Center"/>
+                                            <StackPanel x:Name="GenderSelection" Orientation="Horizontal"  HorizontalAlignment="Right" KeyUp="RegKeyUp">
+                                            <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                                         Margin="4" IsChecked="True" FontSize="18"
+                                                         Content="Муж" BorderBrush="#FF673AB7" FontFamily="/MaterialDesignApp;component/Montserrat/#Montserrat"/>
+                                            <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                                     Margin="4" IsChecked="False" FontSize="18"
+                                                     Content="Жен" BorderBrush="#FF673AB7"/>
+                                            <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                                     Margin="4" IsChecked="False" FontSize="18"
+                                                     Content="Другое" BorderBrush="#FF673AB7"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                            <Grid>
+                                <Button x:Name="HaveAccountButton" HorizontalAlignment="Left" 
+                                        Height="60" Content="У меня уже есть аккаунт" FontSize="20" 
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                        Click="HaveAccountButton_Click"/>
+                                <Button x:Name="RegButton2" HorizontalAlignment="Right" 
+                                        Width="200" Height="60" Content="Регистрация"
+                                        materialDesign:ButtonAssist.CornerRadius="5" FontSize="20"
+                                        Click="RegButton2_Click"/>
+                            </Grid>
+                        </StackPanel>
+                        </Border>
+                    </materialDesign:DialogHost>
+                </Grid>
+            </Grid>
+        </Border>
+    </Border>
+</Window>

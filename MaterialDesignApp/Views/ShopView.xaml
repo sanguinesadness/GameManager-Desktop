@@ -1,0 +1,155 @@
+﻿<UserControl x:Class="MaterialDesignApp.Views.ShopView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaterialDesignApp.Views"
+             TextOptions.TextRenderingMode="Aliased" FontSize="22"
+             FontFamily="/MaterialDesignApp;component/Montserrat/#Montserrat"
+             mc:Ignorable="d" 
+             d:DesignHeight="815" d:DesignWidth="1440"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Loaded="UserControl_Loaded">
+    <Border>
+        <materialDesign:DialogHost x:Name="DialogHost">
+            <materialDesign:DialogHost.DialogContent>
+                <Border Padding="20" MinWidth="310">
+                    <Grid>
+                        <Grid x:Name="ItemInfoDialog" Visibility="Visible">
+                            <StackPanel>
+                                <TextBlock Text="Покупка предмета" FontWeight="SemiBold" 
+                                       TextAlignment="Center" FontSize="18" Margin="0 0 0 20"/>
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
+                                    <Border CornerRadius="5" Width="105" Height="75" Margin="0 0 15 0">
+                                        <Border.Background>
+                                            <ImageBrush x:Name="DialogItemImage"
+                                                    ImageSource="/Images/Items/deadalus.png" Stretch="Fill"/>
+                                        </Border.Background>
+                                        <Border.Effect>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="3" Opacity="0.5"/>
+                                        </Border.Effect>
+                                    </Border>
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                                            <TextBlock FontSize="16" Text="Предмет:" Margin="0 0 10 0"/>
+                                            <TextBlock x:Name="DialogItemName" FontWeight="Bold" FontSize="16" Text="Deadalus"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                                            <TextBlock FontSize="16" Text="Количество:"/>
+                                            <ComboBox x:Name="DialogItemQuantity" FontSize="16" FontWeight="SemiBold" 
+                                                  Foreground="#000" Margin="10 -5 0 0" DropDownClosed="DialogItemQuantity_DropDownClosed">
+                                                <ComboBoxItem x:Name="ComboBoxItem1" Content="1"/>
+                                                <ComboBoxItem Content="2"/>
+                                                <ComboBoxItem Content="3"/>
+                                                <ComboBoxItem Content="4"/>
+                                                <ComboBoxItem Content="5"/>
+                                                <ComboBoxItem Content="6"/>
+                                                <ComboBoxItem Content="7"/>
+                                                <ComboBoxItem Content="8"/>
+                                                <ComboBoxItem Content="9"/>
+                                                <ComboBoxItem Content="10"/>
+                                            </ComboBox>
+                                        </StackPanel>
+                                        <Rectangle Fill="White" Height="10" Margin="0 -20 0 0"/>
+                                        <StackPanel Orientation="Horizontal" Margin="0 -7 0 0">
+                                            <TextBlock FontSize="16" Text="Стоимость:"/>
+                                            <TextBlock x:Name="DialogItemPrice" Foreground="#673ab7" FontSize="16" 
+                                                   FontWeight="Bold" Text="2943" Margin="10 0 0 0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button x:Name="DialogPurchaseCancelButton" Grid.Column="0"
+                                        Content="Назад" FontSize="16" Height="50"
+                                        Margin="0 0 8 0" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                                    <Button x:Name="DialogPurchaseConfirmButton" Grid.Column="1"
+                                        Content="Купить" FontSize="16" Height="50"
+                                        Margin="8 0 0 0" Click="DialogPurchaseConfirmButton_Click"/>
+                                </Grid>
+                                <TextBlock x:Name="NotEnoughMoneyError" ToolTip="Скрыть" Cursor="Hand"
+                                           Text="У вас недостаточно средств." FontSize="16" Visibility="Collapsed"
+                                           Foreground="#f44336" FontWeight="SemiBold" Margin="0 15 0 0"
+                                           MouseUp="NotEnoughMoneyError_MouseUp" TextAlignment="Center"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid x:Name="SuccessfulPurchaseDialog" Visibility="Hidden">
+                            <StackPanel>
+                                <TextBlock Text="Успешная покупка" FontWeight="SemiBold" 
+                                           TextAlignment="Center" FontSize="18" 
+                                           Margin="0 0 0 20" Foreground="#27ae60"/>
+                                <TextBlock FontSize="16" Margin="0 0 0 15">
+                                    <Run Text="Предмет добавлен в ваш"/>
+                                    <Hyperlink Click="InventoryHyperlink_Click" TextDecorations="none">
+                                        <Run Text="инвентарь" Hyperlink.Click="InventoryHyperlink_Click" FontWeight="SemiBold"/>
+                                    </Hyperlink><Run Text="."/>
+                                </TextBlock>
+                                <Button x:Name="DialogCloseButton"
+                                    Content="ОК" FontSize="16" Height="50"
+                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </materialDesign:DialogHost.DialogContent>
+            <Grid x:Name="Wrapper" Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="85"/>
+                    <RowDefinition Height="630"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="0.6*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0" Background="#F0ECF8">
+                    <TextBlock Text="Доступные разделы"
+                   TextAlignment="Center" VerticalAlignment="Center"
+                   FontWeight="SemiBold"/>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="1" Background="#F0ECF8">
+                    <TextBlock Text="Список предметов"
+                   TextAlignment="Center" VerticalAlignment="Center"
+                   FontWeight="SemiBold"/>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0" Padding="0 50">
+                    <ListView x:Name="ItemCategories" VerticalAlignment="Center">
+                        <ListViewItem Height="80">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="/Images/ItemCategories/artefacts.png" Height="40"
+                               RenderOptions.BitmapScalingMode="Fant" Margin="125 0 15 0"/>
+                                <TextBlock Text="Артефакты" FontSize="28"/>
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView>
+                </Border>
+                <Grid x:Name="ItemsGridContainer" Grid.Row="1" Grid.Column="1">
+                </Grid>
+
+                <Border Grid.Row="2" Grid.Column="0" Background="#F0ECF8">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image Source="/Images/money.png" VerticalAlignment="Center" Height="55" Margin="0 0 20 0"
+                       RenderOptions.BitmapScalingMode="Fant"/>
+                        <local:OutlinedTextBlock x:Name="GoldBalance"
+                                         Text="2507" FontSize="45" Stroke="Black" StrokeThickness="2"
+                                         Fill="#FFD700" FontFamily="Gadugi" FontWeight="Bold"
+                                         HorizontalAlignment="Center" Margin="0 0 0 6"
+                                         VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="1" Background="#F0ECF8">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image Source="/Images/info.png" Height="25" RenderOptions.BitmapScalingMode="HighQuality" Margin="0 0 15 0"/>
+                        <TextBlock Text="Для покупки нажмите на предмет, который хотите приобрести." 
+                           Foreground="DimGray" TextAlignment="Left"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </materialDesign:DialogHost>
+    </Border>
+</UserControl>

@@ -1,0 +1,250 @@
+﻿<UserControl x:Class="MaterialDesignApp.Views.AccountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MaterialDesignApp.Views"
+             TextOptions.TextRenderingMode="Aliased" FontSize="22"
+             FontFamily="/MaterialDesignApp;component/Montserrat/#Montserrat"
+             mc:Ignorable="d" 
+             d:DesignHeight="815" d:DesignWidth="1440"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Loaded="UserControl_Loaded">
+    <Border Background="White">
+        <materialDesign:DialogHost x:Name="DialogHost">
+            <materialDesign:DialogHost.DialogContent>
+                <Border Padding="15">
+                    <Grid>
+                        <Grid x:Name="LogoutDialog" Width="240" Visibility="Visible">
+                            <StackPanel>
+                                <TextBlock Text="Выход из аккаунта" FontWeight="SemiBold" 
+                                   TextAlignment="Center" FontSize="18" 
+                                   Margin="0 0 0 15" Foreground="#f44336"/>
+                                <TextBlock FontSize="16" Margin="0 0 0 15" 
+                                   TextWrapping="Wrap" TextAlignment="Center">
+                            <Run Text="Вы уверены, что хотите вернуться к окну"/>
+                            <Run Text="авторизации" FontWeight="Bold"/><Run Text="?"/>
+                                </TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="DialogNoButton" Width="110" Margin="0 0 20 0"
+                                            Content="Нет" FontSize="16" Height="50"
+                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                                    <Button x:Name="DialogYesButton" Width="110"
+                                            Content="Да" FontSize="16" Height="50"
+                                            Click="DialogYesButton_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                        <Grid x:Name="SuccessChangesDialog" Width="320" Visibility="Collapsed">
+                            <StackPanel>
+                                <TextBlock Text="Изменение данных" FontWeight="SemiBold" 
+                                   TextAlignment="Center" FontSize="18" 
+                                   Margin="0 0 0 15" Foreground="#27ae60"/>
+                                <TextBlock FontSize="16" Margin="0 0 0 15" 
+                                           TextWrapping="Wrap" TextAlignment="Center">
+                                    <Run Text="Все изменения"/>
+                                    <Run Text="успешно сохранены" FontWeight="Bold"/><Run Text="."/>
+                                </TextBlock>
+                                <Button x:Name="DialogOkButton1"
+                                    Content="Ок" FontSize="16" Height="50"
+                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                        Click="DialogOkButton1_Click"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid x:Name="FailChangesDialog" Width="320" Visibility="Collapsed">
+                            <StackPanel>
+                                <TextBlock Text="Изменение данных" FontWeight="SemiBold" 
+                                           TextAlignment="Center" FontSize="18" 
+                                           Margin="0 0 0 15" Foreground="#f44336"/>
+                                <TextBlock FontSize="16" Margin="0 0 0 15" 
+                                           TextWrapping="Wrap" TextAlignment="Center">
+                                    <Run Text="При выполнении запроса произошла неизвестная"/>
+                                    <Run Text="ошибка" FontWeight="Bold"/><Run Text="."/>
+                                    <Run Text="Повторите, пожалуйста, позже."/>
+                                </TextBlock>
+                                <Button x:Name="DialogOkButton2"
+                                    Content="Ок" FontSize="16" Height="50"
+                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid x:Name="AdmitChangesDialog" Width="320" Visibility="Collapsed">
+                            <StackPanel>
+                                <TextBlock Text="Изменение данных" FontWeight="SemiBold" 
+                                   TextAlignment="Center" FontSize="18" 
+                                   Margin="0 0 0 30"/>
+                                <Grid Margin="10 0 10 10" Height="70">
+                                    <PasswordBox x:Name="DialogPasswordBox" materialDesign:TextFieldAssist.TextBoxViewMargin="0 5 0 0"
+                                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                                 materialDesign:HintAssist.Hint="Текущий пароль" VerticalAlignment="Top"
+                                                 materialDesign:TextFieldAssist.HasClearButton="True"
+                                                 MouseEnter="TextBox_MouseEnter"
+                                                 MouseLeave="TextBox_MouseLeave"
+                                                 GotFocus="DialogPasswordBox_GotFocus"
+                                                 FontSize="16"
+                                                 KeyUp="DialogPasswordBox_KeyUp"/>
+                                    <TextBlock x:Name="DialogPasswordError" 
+                                           FontSize="12" Foreground="#FFF44336" 
+                                           VerticalAlignment="Bottom" Visibility="Hidden"/>
+                                </Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="AdmitDialogCancelButton" Margin="10 0 10 0"
+                                            Content="Назад" FontSize="16" Height="50" Width="145"
+                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                            Style="{StaticResource MaterialDesignFlatButton}"/>
+                                    <Button x:Name="AdmitDialogConfirmButton" Width="145"
+                                            Content="Подтвердить" FontSize="16" Height="50"
+                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                            Click="AdmitDialogConfirmButton_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </materialDesign:DialogHost.DialogContent>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition x:Name="FirstColumn" Width="0.3*"/>
+                    <ColumnDefinition x:Name="SecondColumn" Width="0.5*"/>
+                    <ColumnDefinition x:Name="ThirdColumn" Width="0.1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" Background="#F0ECF8">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="85"/>
+                        <RowDefinition Height="630"/>
+                        <RowDefinition Height="100"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0">
+                        <TextBlock Text="Доступные действия"
+                                   TextAlignment="Center" VerticalAlignment="Center"
+                                   FontWeight="SemiBold"/>
+                    </Border>
+                    <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+                        <ListView FontSize="22" Margin="0 50 0 0">
+                            <ListViewItem Height="75" MouseUp="ChangeDataListItem_MouseUp">
+                                <ListViewItem.Content>
+                                    <StackPanel Orientation="Horizontal" Margin="65 0 0 0"> 
+                                        <materialDesign:PackIcon Kind="AccountCog">
+                                            <materialDesign:PackIcon.RenderTransform>
+                                                <ScaleTransform ScaleX="1.6" ScaleY="1.6" CenterX="0.5"/>
+                                            </materialDesign:PackIcon.RenderTransform>
+                                        </materialDesign:PackIcon>
+                                        <TextBlock Text="Изменить личные данные" Margin="20 0 0 0"/>
+                                    </StackPanel>
+                                </ListViewItem.Content>
+                            </ListViewItem>
+                            <ListViewItem Height="75" MouseUp="LogOutListItem_MouseUp">
+                                <ListViewItem.Content>
+                                    <StackPanel Orientation="Horizontal" Margin="65 0 0 0">
+                                        <materialDesign:PackIcon Kind="Logout">
+                                            <materialDesign:PackIcon.RenderTransform>
+                                                <ScaleTransform ScaleX="1.6" ScaleY="1.6" CenterX="0.5"/>
+                                            </materialDesign:PackIcon.RenderTransform>
+                                        </materialDesign:PackIcon>
+                                        <TextBlock Text="Выйти из аккаунта" Margin="20 0 0 0"/>
+                                    </StackPanel>
+                                </ListViewItem.Content>
+                            </ListViewItem>
+                        </ListView>
+                    </ScrollViewer>
+                </Grid>
+
+                <Grid Grid.Column="1" x:Name="ChangeDataContent" Visibility="Hidden">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="85"/>
+                        <RowDefinition Height="630"/>
+                        <RowDefinition Height="100"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0">
+                        <TextBlock Text="Изменение данных об аккаунте"
+                                   TextAlignment="Center" VerticalAlignment="Center"
+                                   FontWeight="SemiBold"/>
+                    </Border>
+                    <Border Grid.Row="1" Padding="50">
+                        <StackPanel>
+                            <Grid Margin="0 0 0 30" ToolTip="Вы не можете изменить это поле.">
+                                <TextBox x:Name="LoginTextBox" materialDesign:TextFieldAssist.TextBoxViewMargin="0 10 0 0"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         materialDesign:HintAssist.Hint="Логин"
+                                         materialDesign:TextFieldAssist.HasClearButton="True"
+                                         IsEnabled="False"/>
+                            </Grid>
+                            <Grid Margin="0 0 0 10" Height="80">
+                                <PasswordBox x:Name="NewPasswordBox" materialDesign:TextFieldAssist.TextBoxViewMargin="0 10 0 0"
+                                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                             materialDesign:HintAssist.Hint="Новый пароль" VerticalAlignment="Top"
+                                             materialDesign:TextFieldAssist.HasClearButton="True"
+                                             GotFocus="NewPasswordBox_GotFocus"
+                                             MouseEnter="TextBox_MouseEnter"
+                                             MouseLeave="TextBox_MouseLeave"
+                                             PreviewKeyDown="NewPasswordBox_PreviewKeyDown"
+                                             KeyUp="SaveChanges_KeyUp"
+                                             PasswordChanged="NewPasswordBox_PasswordChanged"/>
+                                <TextBlock x:Name="NewPasswordError" 
+                                           FontSize="12" Foreground="#FFF44336" 
+                                           VerticalAlignment="Bottom" Visibility="Hidden"/>
+                            </Grid>
+                            <Grid Margin="0 0 0 30" Height="80">
+                                <TextBox x:Name="EmailTextBox" materialDesign:TextFieldAssist.TextBoxViewMargin="0 10 0 0"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         materialDesign:HintAssist.Hint="Электронная почта"
+                                         materialDesign:TextFieldAssist.HasClearButton="True"
+                                         VerticalAlignment="Top"
+                                         GotFocus="EmailTextBox_GotFocus"
+                                         TextChanged="EmailTextBox_TextChanged"
+                                         LostFocus="EmailTextBox_LostFocus"
+                                         MouseEnter="TextBox_MouseEnter"
+                                         MouseLeave="TextBox_MouseLeave"
+                                         KeyUp="SaveChanges_KeyUp"
+                                         PreviewKeyDown="EmailTextBox_PreviewKeyDown"/>
+                                <TextBlock x:Name="EmailError" FontSize="12" 
+                                           Foreground="#FFF44336" VerticalAlignment="Bottom"
+                                           Visibility="Hidden" Text="Неверный ввод."/>
+                            </Grid>
+                            <Grid Margin="0 -10 0 30" Height="80">
+                                <DatePicker x:Name="BirthPicker" materialDesign:TextFieldAssist.TextBoxViewMargin="0 10 0 0"
+                                            materialDesign:HintAssist.Hint="Дата рождения"
+                                            materialDesign:HintAssist.IsFloating="True"
+                                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                            VerticalAlignment="Top"
+                                            SelectedDateChanged="BirthPicker_SelectedDateChanged"
+                                            MouseEnter="TextBox_MouseEnter"
+                                            MouseLeave="TextBox_MouseLeave"
+                                            LostFocus="BirthPicker_LostFocus"
+                                            KeyUp="SaveChanges_KeyUp"
+                                            PreviewKeyDown="BirthPicker_PreviewKeyDown"/>
+                            </Grid>
+                            <Grid Margin="0 -10 0 0" Height="80">
+                                <TextBlock Text="Пол:" VerticalAlignment="Center"/>
+                                <StackPanel x:Name="GenderSelection" Orientation="Horizontal"  HorizontalAlignment="Right">
+                                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                                 Margin="15 0" IsChecked="True" FontSize="22" Height="40"
+                                                 Content="Мужской" BorderBrush="#FF673AB7" FontFamily="/MaterialDesignApp;component/Montserrat/#Montserrat"/>
+                                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                                 Margin="15 0" IsChecked="False" FontSize="22" Height="40"
+                                                 Content="Женский" BorderBrush="#FF673AB7"/>
+                                    <RadioButton Style="{StaticResource MaterialDesignTabRadioButton}"
+                                                 Margin="15 0 0 0" IsChecked="False" FontSize="22" Height="40"
+                                                 Content="Другое" BorderBrush="#FF673AB7"/>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Row="2" Padding="50 0 50 30">
+                        <Grid>
+                            <Button x:Name="RestoreDefaultsButton" Content="Сбросить"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    FontSize="18" HorizontalAlignment="Left" Width="260" Height="60"
+                                    Click="RestoreDefaultsButton_Click"/>
+                            <Button x:Name="SaveChangesButton" Content="Сохранить изменения"
+                                    FontSize="18" HorizontalAlignment="Right" Width="260" Height="60"
+                                    Click="SaveChangesButton_Click"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+                <Grid Grid.Column="2" Background="#F0ECF8"/>
+            </Grid>
+        </materialDesign:DialogHost>
+    </Border>
+</UserControl>
