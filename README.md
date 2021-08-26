@@ -30,7 +30,7 @@ GMS (Game Management System, Game Manager) – информационная си
 4. После ввода данных повторно нажмите на кнопку _Регистрация_.
 5. Ваш аккаунт создан.
 
-![reg](https://user-images.githubusercontent.com/59533126/130849180-29f84509-72b3-47da-a679-af6a6650de37.gif)
+![reg](https://user-images.githubusercontent.com/59533126/130921277-dca07b0e-b607-40b4-94a5-6c3f6a54ebba.gif)
 
 Теперь вы можете перейти к следующему шагу - __[авторизации в системе](#white_check_mark-авторизация-в-системе)__.
 
@@ -42,7 +42,7 @@ GMS (Game Management System, Game Manager) – информационная си
 4. Нажмите кнопку _Войти_. Если вы ввели верные данные, авторизация будет выполнена успешно.
 > Чтобы не вводить пароль при каждом входе в приложение, установите флажок в поле _Запомнить пароль_.
 
-![login](https://user-images.githubusercontent.com/59533126/130851512-9f0631db-7646-4bf8-9269-54e3e7c9780e.gif)
+![login](https://user-images.githubusercontent.com/59533126/130921029-e7d2ac96-fffc-4ef1-b8da-2366dab48a4c.gif)
 
 ## :space_invader: Создание нового персонажа
 #### Категории пользователей: `игрок`
@@ -52,7 +52,7 @@ GMS (Game Management System, Game Manager) – информационная си
 3. Откроется окно с описанием выбранного героя. Внизу экрана введите желаемое имя нового персонажа и подтвердите свой выбор, нажав на соответствующую кнопку.
 4. Новый персонаж появится в списке слева.
 
-![char_creation](https://user-images.githubusercontent.com/59533126/130832341-f98ecb9f-50f6-47ea-814f-7eb9864cbf65.gif)
+![char_creation](https://user-images.githubusercontent.com/59533126/130921528-f0dc152f-ae8d-4397-ad10-97248bed27f9.gif)
 
 ## :information_source: Вывод информации о персонажах
 #### Категории пользователей: `игрок`
@@ -69,7 +69,7 @@ GMS (Game Management System, Game Manager) – информационная си
    - баланс (валюта - __золото__)
 3. Чтобы просмотреть инвентарь персонажа, нажмите на значок мешочка в правом нижнем углу.
 
-![char_info](https://user-images.githubusercontent.com/59533126/130838413-e2aa637d-42e9-45cb-a7ed-f1f689cbfc5f.gif)
+![char_info](https://user-images.githubusercontent.com/59533126/130921766-a1e2bee9-27fa-41c8-92cd-ce1b92ee11b0.gif)
 
 ## :firecracker: Удаление персонажа
 #### Категории пользователей: `игрок`
@@ -80,7 +80,7 @@ GMS (Game Management System, Game Manager) – информационная си
 4. Подтвердите удаление.
 5. Персонаж полностью удален из игры.
 
-![char_removal](https://user-images.githubusercontent.com/59533126/130838556-0c364666-1b17-4776-ad6f-9dca97384775.gif)
+![char_removal](https://user-images.githubusercontent.com/59533126/130921971-005a8ef9-58f1-4b93-8ae7-67060501a8b7.gif)
 
 ## :monocle_face: Просмотр информации об игре
 #### Категории пользователей: `игрок`
@@ -94,7 +94,7 @@ GMS (Game Management System, Game Manager) – информационная си
 1. Перейдите на вкладку _Игра_ и в списке выберите нужный элемент.
 2. В основной части страницы появится информация об игровом элементе.
 
-![game_info](https://user-images.githubusercontent.com/59533126/130838703-8bdb01dd-6aea-4ac5-841b-5ab63af92e25.gif)
+![game_info](https://user-images.githubusercontent.com/59533126/130922168-b7d0e808-08f7-46d0-af00-611f29ecf33c.gif)
 
 ## :shopping_cart: Покупка предметов в магазине
 #### Категории пользователей: `игрок`
@@ -112,7 +112,7 @@ GMS (Game Management System, Game Manager) – информационная си
 5. Укажите приобретаемое количество и подтвердите покупку с помощью кнопки _Купить_.
 6. В случае достаточного баланса, покупка будет совершена. Предмет появится в инвентаре персонажа.
 
-![shopping](https://user-images.githubusercontent.com/59533126/130838899-344f8837-a306-49b3-934c-c4a947887326.gif)
+![shopping](https://user-images.githubusercontent.com/59533126/130922569-107e0008-d172-4a29-b6d0-9382d6ae8601.gif)
 
 ## :no_entry: Блокировка и снятие блокировки с персонажей игроков
 #### Категории пользователей: `администратор`
@@ -125,7 +125,7 @@ GMS (Game Management System, Game Manager) – информационная си
 4. Укажите причину блокировки и подтвердите действие.
 5. Персонаж заблокирован. Игрок, владеющий этим персонажем больше __не сможет__ играть за него.
 
-![char_ban](https://user-images.githubusercontent.com/59533126/130839133-b9ab90ee-217e-49a4-a196-13e692c1ecd1.gif)
+![char_ban](https://user-images.githubusercontent.com/59533126/130922879-6a8adf10-766f-4189-a8bd-61001245df13.gif)
 
 Для снятия блокировки выполните следующие действия:
 1. Перейдите в раздел _Игроки_.
@@ -134,7 +134,7 @@ GMS (Game Management System, Game Manager) – информационная си
 4. Подтвердите действие
 5. Персонаж успешно разблокирован.
 
-![char_unban](https://user-images.githubusercontent.com/59533126/130839281-c5b64f93-8cfa-4bcb-a4db-b90f2d916693.gif)
+![char_unban](https://user-images.githubusercontent.com/59533126/130923039-c405a39e-4a6e-48b3-ad99-dc4d40c6e7e8.gif)
 
 ## :page_facing_up: Формирование отчетов и выгрузка в Excel
 #### Категории пользователей: `администратор`
@@ -145,7 +145,8 @@ GMS (Game Management System, Game Manager) – информационная си
 4. Дождитесь окончания загрузки.
 5. Чтобы ознакомиться с данными статистики, откройте сохраненный файл.
 
-![reports_excel](https://user-images.githubusercontent.com/59533126/130839675-f4d425aa-9ce3-480a-b7cc-17e72de16e3f.gif)
+![reports_excel](https://user-images.githubusercontent.com/59533126/130923277-a545fcf2-9cb3-4f9d-bdbd-e0ad347962fa.gif)
+![excel_result](https://user-images.githubusercontent.com/59533126/130923435-25ca5546-1bb6-47b7-9f5c-7ee12f4d6e60.png)
 
 ## :pencil2: Изменение личных данных аккаунта
 #### Категории пользователей: `игрок`, `администратор`
@@ -156,7 +157,7 @@ GMS (Game Management System, Game Manager) – информационная си
 4. В случае ввода правильного пароля ваши данные будут изменены.
 > Вы не можете изменить свой логин.
 
-![account_info](https://user-images.githubusercontent.com/59533126/130840016-13118255-1849-41bf-a13d-8646acaeb9e9.gif)
+![account_info](https://user-images.githubusercontent.com/59533126/130923774-8059c690-e536-4505-b912-0b4612003cb0.gif)
 
 ## :door: Выход из системы
 #### Категории пользователей: `игрок`, `администратор`
@@ -164,5 +165,4 @@ GMS (Game Management System, Game Manager) – информационная си
 1. Нажмите на значок аккаунта в правом верхнем углу и нажмите на кнопку _Выйти из аккаунта_.
 2. Подтвердите выход нажатием на кнопку _Да_.
 
-![logout](https://user-images.githubusercontent.com/59533126/130840287-01d216f6-1046-4768-8637-38ba04d395b3.gif)
-
+![logout](https://user-images.githubusercontent.com/59533126/130923868-1b3e925c-37f4-4648-955c-fa9fa911a3d1.gif)
